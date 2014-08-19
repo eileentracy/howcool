@@ -2,8 +2,54 @@
 
 /* Services */
 
+var app = angular.module('myApp', []);
+ 
+app.service('TemperatureService', function($http, $q) {
 
-// Demonstrate how to register services
-// In this case it is a simple value service.
-angular.module('myApp.services', []).
-  value('version', '0.1');
+    return({
+        getTemps: getTemps,
+    });
+
+    function getTemps() {
+        var request = $http({
+            method: "get",
+            url: "localhost:8000/temp.log",
+            params: {
+                action: "get"
+            }
+        });
+
+        return( request.then( handleSuccess, handleError ) );
+
+        // I transform the successful response, unwrapping the application data
+        // from the API response payload.
+    }
+        
+});
+
+
+function handleSuccess( response ) {
+    return( response.data );
+}
+
+function handleError( response ) {
+
+    // The API response from the server should be returned in a
+    // nomralized format. However, if the request was not handled by the
+    // server (or what not handles properly - ex. server error), then we
+    // may have to normalize it on our end, as best we can.
+    if (
+        ! angular.isObject( response.data ) ||
+        ! response.data.message
+        ) {
+
+        return( $q.reject( "An unknown error occurred." ) );
+
+    }
+
+    // Otherwise, use expected error message.
+    return( $q.reject( response.data.message ) );
+}
+
+
+

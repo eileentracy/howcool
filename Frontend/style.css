@@ -1,0 +1,38 @@
+/* Styles go here */
+.wrapper {
+  width:300px;
+  margin:0 auto;
+}
+h1, h2 {
+  text-align: center;
+}
+h1 {
+  color:#428bca;
+}
+h2{
+  padding:0;
+  margin:10px 0 0 0;
+}
+.temp, .humidity {
+  display:block;
+  border:2px solid #ccc;
+  border-radius: 20px;
+  padding:30px;
+  padding-top:10px;
+  overflow:hidden;
+  margin-bottom:20px;
+}
+.f_r {
+  float:right;
+}
+.f_l {
+  float:left;
+}
+.data {
+  font-size:125px;
+  font-weight:bold;
+  text-align:center;
+  display:block;
+  line-height: 150px;
+  margin-bottom:10px;
+}
